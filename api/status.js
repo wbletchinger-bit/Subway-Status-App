@@ -16,7 +16,14 @@ const EFFECT_MAP = {
 
 function fetchJSON(url) {
   return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
+    const options = {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (compatible; TrainCheck/1.0)",
+        "Accept": "application/json",
+        "Accept-Encoding": "identity",
+      }
+    };
+    https.get(url, options, (res) => {
       if (res.statusCode !== 200) {
         reject(new Error(`MTA returned status ${res.statusCode}`));
         return;
